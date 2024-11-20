@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>counter</title>
+  </head>
+  <body>
+    <p id="counter"></p>
+    <button type="button" onclick="increment()" id="increment">
+      Increment
+    </button>
+    <button type="button" onclick="decrement()" id="decrement">
+      Decrement
+    </button>
+    <button type="button" onclick="reset()" id="reset">reset</button>
+
+    <script>
+      const getDbItem = () => Number.parseInt(localStorage.getItem("counter"));
+
+      const SetDbItem = () => {
+        localStorage.setItem("counter", counter);
+        getDbItem();
+      };
+      if (!getDbItem()) {
+        localStorage.setItem("counter", 0);
+      }
+      let counter = getDbItem();
+      document.getElementById("counter").innerHTML = counter;
+
+      let increment = () => {
+        document.getElementById("counter").innerHTML = counter += 1;
+        SetDbItem();
+      };
+      let decrement = () => {
+        counter > 0 &&
+          (document.getElementById("counter").innerHTML = counter -= 1);
+        SetDbItem();
+      };
+      let reset = () => {
+        counter = 0;
+        document.getElementById("counter").innerHTML = counter;
+        SetDbItem();
+      };
+    </script>
+  </body>
+</html>
